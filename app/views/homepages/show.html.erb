@@ -3,7 +3,12 @@
   <div class="small-5 large-4 columns">
     <%= image_tag(@recipe.image, :title => @recipe.label, :alt => @recipe.label) %>
     <div><%= link_to 'Go to Original Recipe', @recipe.url, :target => '_blank', class: "button" %></div>
+    <div><%= link_to 'Save This Recipe', create_my_recipes_path(label: @recipe.label, image: @recipe.image, url: @recipe.url), method: :post, class: "button" %></div>
   </div>
+
+  <% if flash[:error] %>
+    <%= flash[:error] %>
+  <% end %>
 
   <div class="small-2 large-4 columns align-self-middle">
     <P>Servings: <%= @recipe.servings.round(0) %></p>

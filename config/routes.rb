@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   delete 'myrecipes/:id/destroy' => 'myrecipes#destroy', as: 'delete_my_recipes'
 
+  post 'myrecipes/create' => 'myrecipes#create', as: 'create_my_recipes'
+
   get 'homepages/show/:id' => 'homepages#show', as: 'show'
 
   get 'homepages/search' => 'homepages#search', as: 'search'
