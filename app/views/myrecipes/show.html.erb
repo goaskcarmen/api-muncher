@@ -1,2 +1,19 @@
-<h1>Myrecipes#show</h1>
-<p>Find me in app/views/myrecipes/show.html.erb</p>
+<h1>My Recipes</h1>
+
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
+<table>
+  <!-- <tr>
+    <th>Title</th>
+    <th>Image</th>
+  </tr> -->
+<% @allrecipes.each do |recipe| %>
+  <tr>
+    <td><%= link_to "#{recipe.label}", recipe.url, :target => '_blank' %></td>
+    <td><%= image_tag(recipe.image, :title => recipe.label, :alt => recipe.label) %></td>
+    <td><%= link_to "Remove", delete_my_recipes_path(recipe), data: { confirm: "Are you sure?" }, method: :delete %></td>
+  </tr>
+<% end %>
+</table>

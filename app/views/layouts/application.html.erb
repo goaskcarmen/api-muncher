@@ -12,11 +12,16 @@
   <% if session[:user_id] == nil %>
     <%= link_to("Log In with Google", "/auth/google_oauth2") %>
   <% else %>
-    <% if @user %>
-      <%= "Hello, #{@user.name}!" %>
+    <% if current_user %>
+      <%= "Hello, #{current_user.name.capitalize}!" %>
     <% end %>
-    <%= link_to "Logout", sessions_destroy_path, method: :delete %>
-    <%= link_to "My Recipes", saved_recipes_show_path, method: :get %>
+    <%= link_to "Logout", sessions_destroy_path, method: :delete, class: "button" %>
+        <% unless current_user.myrecipes %>
+          <% recipe_count = 0 %>
+        <% else %>
+          <% recipe_count = current_user.myrecipes.count%>
+        <% end %>
+    <%= link_to "My Recipes (#{recipe_count})", show_my_recipes_path, method: :get, class: "button" %>
   <% end %>
 <!-- ############### Login/Logout ################## -->
 
